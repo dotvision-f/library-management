@@ -23,7 +23,7 @@ class Account:
         self.phone = phone
     ### DO DONE
 
-# Tai khoan cua nguoi ben nguoi truong
+# Tai khoan cua nguoi ben nguoi truong.
 '''
 - Log In / Sign Up / Log Out / Reset Password (function)
 - Search Book: by Title, Author, Subject (function)
