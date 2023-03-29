@@ -81,20 +81,19 @@ class Guest(Account):
 - Read full Book
 '''
 class Student(Account):
-  def __init__(self, email, ID, password, status=None, account_type="student"):
-    super().__init__(email, password, status, account_type)
-    self.ID = ID
+  def __init__(self, email, password, status=None, type="student"):
+    super().__init__(email, password, status, type)
     self.archives = {}
 
   def view_info(self):
     print(f"Name: {self.email}")
     print("Password: " + "*" * len(self.password))
     print(f"Status: {self.status}")
-    print(f"Type: {self.account_type}")
+    print(f"Type: {self.type}")
     print(f"Archives: {self.archives}")
 
   def borrow_book(self, book: Book):
-    if self.account_type not in ["student", "teacher"]:
+    if self.type not in ["student", "teacher"]:
       return print('Bạn không đủ level mượn sách')    
     elif self.status == "block":
       print(f"Tài khoản {self.email} của bạn đã bị chặn quyền mượn sách.")
@@ -116,7 +115,7 @@ class Student(Account):
         print(f"Tài khoản {self.email} đã hủy thao tác")
     
   def return_book(self, book: Book):
-    if self.account_type not in ["student", "teacher"]:
+    if self.type not in ["student", "teacher"]:
       print("Bạn không thể thực hiện chức năng này")
     elif book not in self.archives:
       print("Không tìm thấy thông tin sách muốn trả")
@@ -136,21 +135,20 @@ class Student(Account):
 - Download pdf file
 '''
 class Teacher(Account):
-  def __init__(self, email, ID, password, status=None, account_type="student"):
-    super().__init__(email, password, status, account_type)
-    self.ID = ID
+  def __init__(self, email, ID, password, status=None, type="teacher"):
+    super().__init__(email, password, status, type)
     self.archives = {}
 
   def view_info(self):
     print(f"Name: {self.email}")
     print("Password: " + "*" * len(self.password))
     print(f"Status: {self.status}")
-    print(f"Type: {self.account_type}")
+    print(f"Type: {self.type}")
     print(f"Archives: {self.archives}")
 
 
   def borrow_book(self, book: Book):
-    if self.account_type not in ["student", "teacher"]:
+    if self.type not in ["student", "teacher"]:
       return print('Bạn không đủ level mượn sách')    
     elif self.status == "block":
       print(f"Tài khoản {self.email} của bạn đã bị chặn quyền mượn sách.")
@@ -168,7 +166,7 @@ class Teacher(Account):
           print("Đã thêm sách thành công, bạn có thể đến thư viện mượn sách")
 
   def return_book(self, book: Book):
-    if self.account_type not in ["student", "teacher"]:
+    if self.type not in ["student", "teacher"]:
       print("Bạn không thể thực hiện chức năng này")
     elif book not in self.archives:
       print("Không tìm thấy thông tin sách muốn trả")
@@ -183,8 +181,11 @@ class Teacher(Account):
 
 
   def request_add_book(self):
+    if self.type == "teacher":
       request = input("Nhập tên sách yêu cầu được mua/cập nhập thêm: ")
       print(f"{self.email} đã yêu cầu thêm sách {request}")
+    else:
+      raise ValueError("Bạn không đủ thẩm quyền thực hiện chức này")
 
   def dowload_PDF(self):
       print("Bạn có thể tải file PDF")
