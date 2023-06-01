@@ -1,17 +1,15 @@
 # Thong tin chung ve tai khoan
 from function import *
 from constant import *
-from datetime import datetime, date, timedelta
-from book import Book
+from datetime import datetime, date
 ## id, password, status
 '''
 '''
-class Account:
+class Account():
     # def __init__(self, id, password, status=True). Them self cua cac add_info duoi dang None
-    def __init__(self, email, password, status=None, type=None):
+    def __init__(self, email, password, level=None):
         self.email = email
         self.__password = password
-        self.status = status
         self.type = type
         #add_infor
         self.name = None

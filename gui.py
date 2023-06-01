@@ -3,7 +3,7 @@ class gui:
     def Title(title):
         return f'''
 -------------------------------------------
-                {title}
+        {title}
 -------------------------------------------'''
 
 
@@ -335,7 +335,7 @@ vòng 24h để lấy sách kể từ khi đăng ký thành công.
     def Object_edit_info_member(object:str):
         return f"""
 -------------------------------------------
-            Edit personal information
+        Edit personal information
 -------------------------------------------
 Type the new {object} OR
 
@@ -514,7 +514,7 @@ You have done to edit {object}.
 # """
 # Enter the number:
     ####
-    def Choose_book(info_book:dict):
+    def Choose_book_admin(info_book:dict):
         return f"""
 -------------------------------------------
         Book {info_book['title']}

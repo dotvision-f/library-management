@@ -28,7 +28,8 @@ class Build:
                 else:
                     continue
             if not isTrue_username:
-                Creat_password(self.username)
+                password = Creat_password(self.username)
+                ### Them vao database: self.username, password
                 Done_sign_up()
                 self.Func_Home()
         else:
@@ -76,7 +77,7 @@ class Build:
         elif your_online_book_list == "0":
             self.Func_Main_Member()
         else:
-            self.info_book = {"name": "x", "author":"b"} #####
+            self.info_book = {"title": "x", "author":"b"} #####
             self.Func_Online_choose_book()
     #####
     def Func_Online_choose_book(self):
@@ -84,8 +85,10 @@ class Build:
         if online_choose_book == "1":
             self.Func_Read_book()
         elif online_choose_book == "2":
+            ##### Checking
             self.Func_Download_pdf_file()
         elif online_choose_book == "3":
+            ##### Remove from data base
             Remove_from_list(self.info_book)
             self.Func_Main_Member()
         elif online_choose_book == "00":
@@ -115,7 +118,7 @@ class Build:
         elif your_offline_book_list == "0":
             self.Func_Main_Member()
         else:
-            self.info_book = {"name": "x", "author":"b"} #####
+            self.info_book = {"title": "x", "author":"b"} #####
             self.Func_Offline_choose_book()
     #####
     def Func_Offline_choose_book(self):
@@ -128,7 +131,7 @@ class Build:
             self.Func_Main_Member()
     ######
     def Func_Return_book(self):
-        return_book = Return_book(self.info_book)
+        return_book = Return_book(self.info_book)   ##### Creat random number (4 chữ số) để admin check
         if return_book == "00":
             self.Func_Offline_choose_book()
         else:
@@ -170,6 +173,7 @@ class Build:
         elif choose_book == "2":
             self.Func_Borrow_book()
         elif choose_book == "3":
+            ##### checking
             self.Func_Download_pdf_file()
         elif choose_book == "00":
             self.Func_List_search()
@@ -331,10 +335,10 @@ class Build:
             self.Func_Main_Admin()
         else:
             self.info_book = {"title": "x", "author": "z"} #####
-            self.Func_Choose_book()
+            self.Func_Choose_book_admin()
     
     ####
-    def Func_Choose_book(self):
+    def Func_Choose_book_admin(self):
         choose_book = Choose_book(self.info_book)
         if choose_book == "1":
             self.Func_Edit_info_book()

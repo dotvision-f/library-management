@@ -201,7 +201,7 @@ def Object_edit_info_book(object:str):
 def Done_edit_info_book(object:str):
     return show_fix(gui.Done_edit_info_book(object),["0","00"])
 
-def Choose_book(info_book:dict):
+def Choose_book_admin(info_book:dict):
     return show_fix(gui.Choose_book(info_book), ["1","2","0","00"])
 
 def Remove_book(info_book:dict):
