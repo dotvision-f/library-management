@@ -22,7 +22,7 @@ class Book_DB:
         self.sheet[f"A{self.count + 1}"] = title
         self.sheet[f"B{self.count + 1}"] = author
         self.sheet[f"C{self.count + 1}"] = subject
-        self.sheet[f"C{self.count + 1}"] = PDF_link
+        self.sheet[f"D{self.count + 1}"] = PDF_link
         self.count += 1
 
     def remove_book(self, title):
@@ -72,9 +72,9 @@ class Book_DB:
         else:
             return None
 
-#book_db = Book_DB()
-#book_db.write_header()
-#book_db.add_book('anh yeu em', 'dung le', 'poetry', './desktop/anhyeuem.pdf')
-#print(book_db.search_book_author('dung le'))
+book_db = Book_DB()
+book_db.write_header()
+book_db.add_book('anh yeu em', 'dung le', 'poetry', './desktop/anhyeuem.pdf')
+print(book_db.search_book_author('dung le'))
 
-#book_db.save_db()
+book_db.save_db()

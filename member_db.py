@@ -70,12 +70,12 @@ class Member_DB:
     def access_db(self):
         workbook = load_workbook(filename = "Member_Database.xlsx")
 
-#Mem_db = Member_DB()
-#Mem_db.write_header()
-#Mem_db.add_member('quangdung@gmail.com', 21032002)
-#Mem_db.add_member('dungle@gmail.com', 32323232)
-#Mem_db.remove_member('dungle@gmail.com')
-#Mem_db.show_info('quangdung@gmail.com')
+Mem_db = Member_DB()
+Mem_db.write_header()
+Mem_db.add_member('quangdung@gmail.com', 21032002)
+Mem_db.add_member('dungle@gmail.com', 32323232)
+Mem_db.remove_member('dungle@gmail.com')
+Mem_db.show_info('quangdung@gmail.com')
 
-#xong roi thi lu file excel bang cai nay
-#Mem_db.save_db()
+# xong roi thi lu file excel bang cai nay
+Mem_db.save_db()
