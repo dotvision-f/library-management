@@ -1,0 +1,29 @@
+CHUNG
+Cách thức lưu, đọc: username, password
+Cách thức lưu, đọc: Book, 
+a. thông tin user: username(email), password, level
+b. thông tin sách: title, author, subject, pdf link (./file/book1.pdf)
+
+
+USER 
+Remove user from database
+
+2. Cách thức update database User   
+3. Cách lưu danh sách sách của từng cá nhân. (Online, offline list)
+3.1 Return list book: list of class Book
+3.2.
+4. Function: Reading pdf
+
+
+BOOK
+Remove book from database
+
+
+Search book: Title / Author / Subject -> return list of class Book
+
+
+
+
+A. CHUC NANG CON THIEU 
+A.1. Quen mat khau
+A.2. Dang ky tra sach tai thu vien

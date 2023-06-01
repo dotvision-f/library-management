@@ -3,8 +3,7 @@ from function import *
 from constant import *
 from datetime import datetime, date
 ## id, password, status
-'''
-'''
+
 class Account():
     # def __init__(self, id, password, status=True). Them self cua cac add_info duoi dang None
     def __init__(self, email, password, level=None):
