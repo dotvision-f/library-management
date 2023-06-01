@@ -69,13 +69,24 @@ class Member_DB:
 
     def access_db(self):
         workbook = load_workbook(filename = "Member_Database.xlsx")
+        
+    def change_info(self, email, type_info_to_change, new_info):
+        row_index = self.find_row_index(email)
+        if str(type_info_to_change) == 'email':
+            self.sheet[f"A{row_index}"].value = new_info
+        elif str(type_info_to_change) == 'password':
+            self.sheet[f"B{row_index}"].value = new_info
+        elif str(type_info_to_change) == 'in bag':
+            self.sheet[f"D{row_index}"].value = new_info
+        else:
+            print("please enter the correct type of data to change: email, password or in bag.")
 
-Mem_db = Member_DB()
-Mem_db.write_header()
-Mem_db.add_member('quangdung@gmail.com', 21032002)
-Mem_db.add_member('dungle@gmail.com', 32323232)
-Mem_db.remove_member('dungle@gmail.com')
-Mem_db.show_info('quangdung@gmail.com')
+#Mem_db = Member_DB()
+#Mem_db.write_header()
+#Mem_db.add_member('quangdung@gmail.com', 21032002)
+#Mem_db.add_member('dungle@gmail.com', 32323232)
+#Mem_db.remove_member('dungle@gmail.com')
+#Mem_db.show_info('quangdung@gmail.com')
 
-# xong roi thi lu file excel bang cai nay
-Mem_db.save_db()
+#xong roi thi lu file excel bang cai nay
+#Mem_db.save_db()
