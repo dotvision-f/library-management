@@ -10,6 +10,9 @@ BOOK_BORROW = 5
 (LENT, PENDING, FREE) = (0,1,2)
 
 # Types of Account
-(GUEST, STUDENT, TEACHER) = (0,1,2)
-# Status of Account
-(ACTIVE, BLOCK, CANCEL) = (0,1,2)
+(GUEST, STUDENT, TEACHER, ADMIN) = (0,1,2,3)
+
+
+def add_mem(username, passw):
+    #code de them acc vao trong data base
+    pass

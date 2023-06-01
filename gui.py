@@ -91,7 +91,7 @@ Welcome {username} to the library.
 -------------------------------------------
             Read / Borrow books 
 -------------------------------------------
-#### Noi dung gioi thieu . NHAP TAI DAY###
+Read / Borrow books 
 
 1. Your book list
 2. Search by title
@@ -106,7 +106,7 @@ Welcome {username} to the library.
 -------------------------------------------
             Your book list
 -------------------------------------------
-#### Noi dung gioi thieu . NHAP TAI DAY###
+Your book list
 
 1. Your online book list
 2. Your offline book list
@@ -170,7 +170,7 @@ Bạn đang đọc cuốn sách "{info_book['title']}" tại một cửa sổ m�
 -------------------------------------------
   Download pdf file of "{info_book['title']}"
 -------------------------------------------
-Bạn đang tải pdf file of cuốn sách ""{info_book['title']}"".
+Xin thông cảm, tính năng đang được nâng cấp"".
 
 0. trở về home page
 00. trở về trang trước
@@ -384,12 +384,16 @@ You have done to edit {object}.
 """
 # Enter the number:
     ###
-    def Overview_member():
+    def Overview_member(guests, students, teachers):
         return f"""
 -------------------------------------------
             Overview Member
 -------------------------------------------
-### Show number of members/ numbers of each type members (teacher, student, ...)
+The number of members: {guests + students + teachers}
+Include:
+        Guests: {guests}
+        Students: {students}
+        Teachers: {teachers}
 
 0. Back to Home Page
 00. Back to Previous Page
@@ -411,43 +415,45 @@ You have done to edit {object}.
 # Enter the number:
     ####
     def Choose_member(info_member:dict):
-        return f"""
+        strs = f"""
 -------------------------------------------
-        Member {info_member['name']}
+            Member {info_member['email']}
 -------------------------------------------
-### Show infor
+"""
+        for i in info_member:
+            strs += f"{i}: {info_member[i]}\n"
+        strs+="""
+        
 1. Edit information
 2. Books of member
-3. Block member
-4. Active member
+3. Remove member
 0. Back to Home Page
 00. Back to Previous Page
 """
+        return strs
 # Enter the number:
     #####
-    def Books_of_member(info_member:dict):
-        return f"""
+    def Books_of_member(username, list_book:list):
+        strs = f"""
 -------------------------------------------
-        Book of {info_member['name']}
+        Books of "{username}"
 -------------------------------------------
-### Show list book
-
+"""
+        for i in range(len(list_book)):
+            strs += f"Number {i+1}: {list_book[i]}\n"
+        strs+="""
 0. Back to Home Page
 00. Back to Previous Page
 """
+        return strs
 # Enter the number:
 
-    def Block_member(info_member:dict):
+    def Remove_member(info_member:dict):
         strs = f"""
 -------------------------------------------
-            Block {info_member['name']}
+            Remove {info_member['email']}
 -------------------------------------------
-"""
-        if info_member['status'] == "ACTIVE":
-            strs += f"Ban da block member {info_member['name']} thanh cong."
-        else:
-            strs += f"Ban da block member {info_member['name']} truoc do."
-        strs += """
+Ban da remove member {info_member['name']} thanh cong.
 
 0. Back to Home Page
 00. Back to Previous Page
@@ -455,23 +461,6 @@ You have done to edit {object}.
         return strs
 # Enter the number:
 
-    def Active_member(info_member:dict):
-        strs = f"""
--------------------------------------------
-            Active {info_member['name']}
--------------------------------------------
-"""
-        if info_member['status'] == "ACTIVE":
-            strs += f"Ban da active member {info_member['name']} truoc do."
-        else:
-            strs += f"Ban da active member {info_member['name']} thanh cong."
-        strs += """
-        
-0. Back to Home Page
-00. Back to Previous Page
-"""
-        return strs
-# Enter the number:
     ##
     def Manage_book():
         return f"""
@@ -485,12 +474,12 @@ You have done to edit {object}.
 0. Back to Home Page
 """
     ###
-    def Overview_book():
+    def Overview_book(numbers):
         return f"""
 -------------------------------------------
             Overview Book
 -------------------------------------------
-### Show number book
+Number of books: {numbers}
 
 0. Back to Home Page
 00. Back to Previous Page
@@ -515,17 +504,20 @@ You have done to edit {object}.
 # Enter the number:
     ####
     def Choose_book_admin(info_book:dict):
-        return f"""
+        strs = f"""
 -------------------------------------------
-        Book {info_book['title']}
+        Book: "{info_book['title']}"
 -------------------------------------------
-### Show infor
-
+"""
+        for i in info_book:
+            strs += f"{i}: {info_book[i]}\n"
+        strs+="""
 1. Edit information
 2. Remove book
 0. Back to Home Page
 00. Back to Previous Page
 """
+        return strs
 # Enter the number:
 
 

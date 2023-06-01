@@ -4,7 +4,7 @@ from openpyxl import load_workbook
 class Member_DB:
 
     def __init__(self):
-        self.header = ['email', 'password', 'level', 'in bag']
+        self.header = ['email', 'password', 'level', 'in_bag', 'id', 'name']
         self.mem_db = Workbook()
         self.sheet = self.mem_db.active
         self.count = 1
@@ -14,26 +14,37 @@ class Member_DB:
         self.sheet["B1"] = self.header[1]
         self.sheet["C1"] = self.header[2]
         self.sheet["D1"] = self.header[3]
+        self.sheet["E1"] = self.header[4]
+        self.sheet["F1"] = self.header[5]
 
     def save_db(self):              #sau khi thao tac xong, goi ham nay de luu database
         self.mem_db.save("Member_Database.xlsx")
 
-    def add_member(self, email, password):
+    def add_member(self, email, password, id=None, name=None, level=None, in_bag=""):
         email = str(email)
         password = str(password)
         self.sheet[f"A{self.count + 1}"] = email
         self.sheet[f"B{self.count + 1}"] = password
-        self.sheet[f"D{self.count + 1}"] = None
+        self.sheet[f"D{self.count + 1}"] = f",{in_bag}"
+        self.sheet[f"E{self.count + 1}"] = id
+        self.sheet[f"F{self.count + 1}"] = name
 
-        email_split = email.split("@")
-        if email_split[1] == 'st.phenikaa-uni.edu.vn':
-            self.sheet[f"C{self.count + 1}"] = "Student"
-        elif email_split[1] == 'phenikaa-uni.edu.vn':
-            self.sheet[f"C{self.count + 1}"] = "Teacher"
+        if level != 3:
+            if "@" in email:
+                email_split = email.split("@")
+                if email_split[1] == 'st.phenikaa-uni.edu.vn':
+                    self.sheet[f"C{self.count + 1}"] = 1 # "Student"
+                elif email_split[1] == 'phenikaa-uni.edu.vn':
+                    self.sheet[f"C{self.count + 1}"] = 2 # "Teacher"
+                else:
+                    self.sheet[f"C{self.count + 1}"] = 0 # "Guest"
+            else:
+                self.sheet[f"C{self.count + 1}"] = 0 # "Guest"
         else:
-            self.sheet[f"C{self.count + 1}"] = "Guest"
+                self.sheet[f"C{self.count + 1}"] = 3 # "Admin"
 
         self.count += 1
+        self.save_db()
 
     def remove_member(self, email):
         email = email
@@ -58,7 +69,7 @@ class Member_DB:
         book_name = book_name
         row_index = self.find_row_index(email)
         column_d_value = self.sheet[f'D{row_index}']
-        column_d_value.value = book_name
+        column_d_value.value += f",{book_name}"
 
     def show_info(self, email):
         row_index = self.find_row_index(email)
@@ -66,6 +77,9 @@ class Member_DB:
         print("password: ", self.sheet[f"B{row_index}"].value)
         print("level: ", self.sheet[f"C{row_index}"].value)
         print("in bag: ", self.sheet[f"D{row_index}"].value)
+        print("id: ", self.sheet[f"E{row_index}"].value)
+        print("name: ", self.sheet[f"F{row_index}"].value)
+
 
     def access_db(self):
         workbook = load_workbook(filename = "Member_Database.xlsx")
@@ -76,17 +90,22 @@ class Member_DB:
             self.sheet[f"A{row_index}"].value = new_info
         elif str(type_info_to_change) == 'password':
             self.sheet[f"B{row_index}"].value = new_info
-        elif str(type_info_to_change) == 'in bag':
+        elif str(type_info_to_change) == 'in_bag':
             self.sheet[f"D{row_index}"].value = new_info
+        elif str(type_info_to_change) == 'id':
+            self.sheet[f"E{row_index}"].value = new_info
+        elif str(type_info_to_change) == 'name':
+            self.sheet[f"F{row_index}"].value = new_info
         else:
             print("please enter the correct type of data to change: email, password or in bag.")
 
-#Mem_db = Member_DB()
-#Mem_db.write_header()
-#Mem_db.add_member('quangdung@gmail.com', 21032002)
-#Mem_db.add_member('dungle@gmail.com', 32323232)
-#Mem_db.remove_member('dungle@gmail.com')
-#Mem_db.show_info('quangdung@gmail.com')
+# Mem_db = Member_DB()
+# Mem_db.write_header()
+# Mem_db.add_member('quangdung@gmail.com', 21032002)
+# Mem_db.add_member('dungle@gmail.com', 32323232)
+# Mem_db.remove_member('dungle@gmail.com')
+# Mem_db.show_info('quangdung@gmail.com')
 
-#xong roi thi lu file excel bang cai nay
-#Mem_db.save_db()
+# # # xong roi thi lu file excel bang cai nay
+# Mem_db.save_db()
+# print(len(Mem_db.mem_db['A']))

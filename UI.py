@@ -9,8 +9,9 @@ databases = [{"username": "1", "password": "2", "type": "member"},\
 # Man hinh chao don ban dau
 ## Dang nhap va dang ky cung chung man hinh.
 
-def show_fix(gui: gui, syntaxs: list, fix='number'):
-    os.system('clear')
+def show_fix(gui: gui, syntaxs: list, fix='number', back=""):
+    if back != "read":
+        os.system('clear')
     if fix == 'password': x1 = "password"
     else: x1 = 'number/syntax'
     print(gui)
@@ -94,7 +95,7 @@ def Online_choose_book(info_book:dict):
     return show_fix(gui.Online_choose_book(info_book), ["1", "2", "3", "0", "00"])
 
 def Read_book(info_book:dict):
-    return show_fix(gui.Read_book(info_book), ["0","00"])
+    return show_fix(gui.Read_book(info_book), ["0","00"], back="read")
 
 def Download_pdf_file(info_book:dict):
     return show_fix(gui.Download_pdf_file(info_book), ["0","00"])
@@ -162,29 +163,26 @@ def Main_admin():
 def Manage_member():
     return show_fix(gui.Manage_member(), ["1","2","0"])
 
-def Overview_member():
-    return show_fix(gui.Overview_member(), ["0", "00"])
+def Overview_member(guests, students, teachers):
+    return show_fix(gui.Overview_member(guests, students, teachers), ["0", "00"])
 
 def Detail_member(member_list:list):
     return show_content("Detail Member", member_list)
 
 def Choose_member(info_member:dict):
-    return show_fix(gui.Choose_member(info_member), ["1","2","3","4","0","00"])
+    return show_fix(gui.Choose_member(info_member), ["1","2","3","0","00"])
 
-def Books_of_member(info_member:dict):
-    return show_fix(gui.Books_of_member(info_member), ["0","00"])
+def Books_of_member(username, list_book):
+    return show_fix(gui.Books_of_member(username, list_book), ["0","00"])
 
-def Block_member(info_member:dict):
-    return show_fix(gui.Block_member(info_member), ["0","00"])
-
-def Active_member(info_member:dict):
-    return show_fix(gui.Active_member(info_member), ["0","00"])
+def Remove_member(info_member:dict):
+    return show_fix(gui.Remove_member(info_member), ["0","00"])
 
 def Manage_book():
     return show_fix(gui.Manage_book(), ["1","2","3","0"])
 
-def Overview_book():
-    return show_fix(gui.Overview_book(), ["0", "00"])
+def Overview_book(numbers):
+    return show_fix(gui.Overview_book(numbers), ["0", "00"])
 
 def Detail_book(book_list:list):
     return show_content("Detail Book", book_list)
@@ -202,7 +200,7 @@ def Done_edit_info_book(object:str):
     return show_fix(gui.Done_edit_info_book(object),["0","00"])
 
 def Choose_book_admin(info_book:dict):
-    return show_fix(gui.Choose_book(info_book), ["1","2","0","00"])
+    return show_fix(gui.Choose_book_admin(info_book), ["1","2","0","00"])
 
 def Remove_book(info_book:dict):
     return show_fix(gui.Read_book(info_book), ["0","00"])
@@ -213,8 +211,8 @@ def Add_book():
     title = input("Title of book: ")
     author = input("Author of book: ")
     subject = input("Subject of book: ")
-    type = input("Type of book: ")
-    book = {'title':title, 'author':author, "subject":subject, "type":type} # creat new book
+    link = input("PDf_link of book: ")
+    book = {'title':title, 'author':author, "subject":subject, "PDF_link":link} # creat new book
     return book
 
 def Done_add_book(info_book:dict):
