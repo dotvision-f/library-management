@@ -3,6 +3,7 @@ from Expend.function import *
 from Expend.constant import *
 from datetime import datetime, date
 from abc import ABC
+from book import *
 ## id, password, status
 
 class Account(ABC):
@@ -80,41 +81,41 @@ class Student(Guest):
      ###### Return 1 dict cac thong so
      pass
   
-  # def borrow_book(self, book: Book):
-  #   if self.type not in ["student", "teacher"]:
-  #     return print('Bạn không đủ level mượn sách')    
-  #   elif self.status == "block":
-  #     print(f"Tài khoản {self.email} của bạn đã bị chặn quyền mượn sách.")
-  #   elif self.status == "cancel":
-  #     print("Tài khoản của bạn đã bị xóa.")
-  #   elif len(self.archives) >= 5:
-  #       print("Bạn đã mượn tối đa số lượng sách có thể mượn.")
-  #   elif book.number_of_book <= 0:
-  #     print("Sách đã hết, vui lòng chọn sách khác.")
-  #   else:
-  #     print("Bạn có thể đọc quyển sách này bây giờ.")
-  #     choice = input("Bạn muốn mượn quyển sách này chứ ? (y/n) ")
-  #     if choice.lower() == "y" and book not in self.archives:
-  #         ngay_muon = date.today()
-  #         self.archives[book] = ngay_muon
-  #         book.number_of_book -= 1
-  #         print("Đã thêm sách thành công, bạn có thể đến thư viện mượn sách")
-  #     else:
-  #       print(f"Tài khoản {self.email} đã hủy thao tác")
+  def borrow_book(self, book: Book):
+    if self.type not in ["student", "teacher"]:
+      return print('Bạn không đủ level mượn sách')    
+    elif self.status == "block":
+      print(f"Tài khoản {self.email} của bạn đã bị chặn quyền mượn sách.")
+    elif self.status == "cancel":
+      print("Tài khoản của bạn đã bị xóa.")
+    elif len(self.archives) >= 5:
+        print("Bạn đã mượn tối đa số lượng sách có thể mượn.")
+    elif book.number_of_book <= 0:
+      print("Sách đã hết, vui lòng chọn sách khác.")
+    else:
+      print("Bạn có thể đọc quyển sách này bây giờ.")
+      choice = input("Bạn muốn mượn quyển sách này chứ ? (y/n) ")
+      if choice.lower() == "y" and book not in self.archives:
+          ngay_muon = date.today()
+          self.archives[book] = ngay_muon
+          book.number_of_book -= 1
+          print("Đã thêm sách thành công, bạn có thể đến thư viện mượn sách")
+      else:
+        print(f"Tài khoản {self.email} đã hủy thao tác")
     
-  # def return_book(self, book: Book):
-  #   if self.type not in ["student", "teacher"]:
-  #     print("Bạn không thể thực hiện chức năng này")
-  #   elif book not in self.archives:
-  #     print("Không tìm thấy thông tin sách muốn trả")
-  #   else:
-  #     ngay_tra = date.today()
-  #     thoi_diem_tra = datetime.combine(ngay_tra, datetime.time.min)
-  #     ngay_muon = self.archives[book]
-  #     tinh_trang = "đúng hạn" if thoi_diem_tra <= ngay_muon + timedelta(days=30) else "quá hạn"
-  #     print(f"Bạn đã trả sách {tinh_trang}")
-  #     del self.archives[book]
-  #     book.number_of_book += 1
+  def return_book(self, book: Book):
+    if self.type not in ["student", "teacher"]:
+      print("Bạn không thể thực hiện chức năng này")
+    elif book not in self.archives:
+      print("Không tìm thấy thông tin sách muốn trả")
+    else:
+      ngay_tra = date.today()
+      thoi_diem_tra = datetime.combine(ngay_tra, datetime.time.min)
+      ngay_muon = self.archives[book]
+      tinh_trang = "đúng hạn" if thoi_diem_tra <= ngay_muon + timedelta(days=30) else "quá hạn"
+      print(f"Bạn đã trả sách {tinh_trang}")
+      del self.archives[book]
+      book.number_of_book += 1
 
 
 # Tai khoan danh cho giao vien
